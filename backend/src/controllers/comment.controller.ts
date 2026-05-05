@@ -1,0 +1,54 @@
+import { Request, Response } from 'express';
+const Comment = require('../models/comment.model');
+
+interface AuthRequest extends Request {
+	user?: {
+		id: string;
+	};
+}
+
+const createComment = async (req: AuthRequest, res: Response) => {
+	try {
+		const { text, postId } = req.body;
+
+		const userId = req.user?.id;
+
+		const comment = await Comment.create({ text, postId, userId });
+
+		return res.status(201).json({
+			success: true,
+			data: comment,
+		});
+	} catch (error: any) {
+		return res.status(500).json({
+			message: error.message,
+		});
+	}
+};
+
+const deleteComment = async (req: Request, res: Response) => {
+	try {
+		const { id } = req.params;
+		const comment = await Comment.findByIdAndDelete(id);
+
+		if (!comment) {
+			return res.status(404).json({
+				message: 'comment not found',
+			});
+		}
+
+		return res.status(201).json({
+			success: true,
+			data: null,
+		});
+	} catch (error: any) {
+		return res.status(500).json({
+			message: error.message,
+		});
+	}
+};
+
+module.exports = {
+	createComment,
+	deleteComment,
+};
