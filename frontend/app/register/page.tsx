@@ -18,6 +18,10 @@ export default function RegisterPage() {
           <p className="text-sm text-slate-600 dark:text-slate-400">
             Already have an account? <Link href="/login" className="font-semibold text-slate-900 underline decoration-slate-200 underline-offset-4 dark:text-white">Login here</Link>.
           </p>
+          <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-400">
+            <Link href="/" className="font-semibold text-slate-900 underline decoration-slate-200 underline-offset-4 dark:text-white">Back to home</Link>
+            <Link href="/login" className="font-semibold text-slate-900 underline decoration-slate-200 underline-offset-4 dark:text-white">Already have an account?</Link>
+          </div>
         </section>
 
         <div className="mx-auto w-full max-w-md">

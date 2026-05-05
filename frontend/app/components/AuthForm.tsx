@@ -49,13 +49,17 @@ export default function AuthForm({ mode }: AuthFormProps) {
       }
 
       if (mode === "login") {
-        window.localStorage.setItem("blogify-token", data.token);
-        window.localStorage.setItem("blogify-user", JSON.stringify(data.user));
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem("blogify-token", data.token);
+          window.localStorage.setItem("blogify-user", JSON.stringify(data.user));
+          document.cookie = `blogify-token=${data.token}; path=/; max-age=86400; sameSite=strict`;
+        }
+
         router.push("/dashboard");
         return;
       }
 
-      setSuccess("Registration successful. Please check your email for verification.");
+      setSuccess("Registration successful. Please check your email and verify your account.");
       setForm({ name: "", email: "", password: "" });
     } catch (error: any) {
       setError(error.message || "Unable to submit form.");

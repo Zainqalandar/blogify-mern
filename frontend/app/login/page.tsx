@@ -18,6 +18,10 @@ export default function LoginPage() {
           <p className="text-sm text-slate-600 dark:text-slate-400">
             New here? <Link href="/register" className="font-semibold text-slate-900 underline decoration-slate-200 underline-offset-4 dark:text-white">Create an account</Link>.
           </p>
+          <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-400">
+            <Link href="/" className="font-semibold text-slate-900 underline decoration-slate-200 underline-offset-4 dark:text-white">Back to home</Link>
+            <Link href="/register" className="font-semibold text-slate-900 underline decoration-slate-200 underline-offset-4 dark:text-white">Need an account?</Link>
+          </div>
         </section>
 
         <div className="mx-auto w-full max-w-md">
