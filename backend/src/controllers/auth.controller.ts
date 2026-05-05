@@ -85,6 +85,10 @@ const login = async (req: Request, res: Response) => {
 			});
 		}
 
+		if(!user.isVerified){
+			return res.status(403).json({ message: 'Verify email first' });
+		};
+
 		const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
 			expiresIn: process.env.JWT_EXPIRES_IN,
 		});
