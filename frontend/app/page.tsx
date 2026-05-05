@@ -25,7 +25,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="rounded-[2rem] border border-slate-200 bg-white/95 p-10 shadow-2xl shadow-slate-200/40 dark:border-slate-800 dark:bg-slate-950/95 dark:shadow-none lg:max-w-xl">
+        <section className="rounded-4xl border border-slate-200 bg-white/95 p-10 shadow-2xl shadow-slate-200/40 dark:border-slate-800 dark:bg-slate-950/95 dark:shadow-none lg:max-w-xl">
           <p className="text-sm uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">Authentication ready</p>
           <h2 className="mt-4 text-3xl font-semibold text-slate-950 dark:text-white">Login or register instantly</h2>
           <p className="mt-3 text-slate-600 dark:text-slate-400">

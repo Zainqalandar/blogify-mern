@@ -5,6 +5,8 @@ const PUBLIC_PATHS = ["/", "/login", "/register", "/verify"];
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  console.log("Middleware check for path:", pathname);
+
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||

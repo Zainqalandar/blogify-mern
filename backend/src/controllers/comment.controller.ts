@@ -48,7 +48,26 @@ const deleteComment = async (req: Request, res: Response) => {
 	}
 };
 
+// blog post comments
+
+const getCommentsByPostId = async (req: Request, res: Response) => {
+	try {
+		const { postId } = req.params;
+		const comments = await Comment.find({ postId });
+
+		return res.status(200).json({
+			success: true,
+			data: comments,
+		});
+	} catch (error: any) {
+		return res.status(500).json({
+			message: error.message,
+		});
+	}
+};
+
 module.exports = {
 	createComment,
 	deleteComment,
+	getCommentsByPostId,
 };

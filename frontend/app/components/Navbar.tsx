@@ -20,6 +20,8 @@ export default function Navbar() {
     if (typeof window !== "undefined") {
       window.localStorage.removeItem("blogify-token");
       window.localStorage.removeItem("blogify-user");
+       // remove cookies token also
+      document.cookie = "blogify-token=; path=/; max-age=0; sameSite=strict";
       router.push("/login");
     }
   };
@@ -34,6 +36,9 @@ export default function Navbar() {
         <nav className="flex items-center gap-4 text-sm font-medium text-slate-700 dark:text-slate-300">
           <Link href="/" className={pathname === "/" ? "text-slate-900 dark:text-white" : "hover:text-slate-900 dark:hover:text-white"}>
             Home
+          </Link>
+          <Link href="/blogs" className={pathname.startsWith("/blogs") ? "text-slate-900 dark:text-white" : "hover:text-slate-900 dark:hover:text-white"}>
+            Blogs
           </Link>
           {userName ? (
             <>

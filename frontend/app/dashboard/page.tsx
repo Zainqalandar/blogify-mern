@@ -22,13 +22,13 @@ export default function DashboardPage() {
         </p>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          <Link href="/register" className="rounded-3xl border border-slate-200 bg-slate-50 px-6 py-6 text-left transition hover:border-slate-300 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-950">
-            <p className="text-sm font-semibold text-slate-900 dark:text-white">Create new post</p>
-            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">Build your first blog entry and share it with the world.</p>
+          <Link href="/blogs/new" className="rounded-3xl border border-slate-200 bg-slate-50 px-6 py-6 text-left transition hover:border-slate-300 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-950">
+            <p className="text-sm font-semibold text-slate-900 dark:text-white">Create new blog</p>
+            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">Write a new story and publish it to your blog feed.</p>
           </Link>
-          <Link href="/login" className="rounded-3xl border border-slate-200 bg-slate-50 px-6 py-6 text-left transition hover:border-slate-300 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-950">
-            <p className="text-sm font-semibold text-slate-900 dark:text-white">Manage comments</p>
-            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">Moderate interactions and keep your blog healthy.</p>
+          <Link href="/blogs" className="rounded-3xl border border-slate-200 bg-slate-50 px-6 py-6 text-left transition hover:border-slate-300 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-950">
+            <p className="text-sm font-semibold text-slate-900 dark:text-white">Browse blog list</p>
+            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">See all posts, check comments, and open post details.</p>
           </Link>
         </div>
       </div>
