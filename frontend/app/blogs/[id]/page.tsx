@@ -89,7 +89,7 @@ export default function BlogDetailPage() {
 						? window.localStorage.getItem('blogify-token')
 						: null;
 				const response = await fetch(
-					`${API_URL}/v1/comments/post/${post._id}`,
+					`${API_URL}/v1/comments/post/${post?. _id}`,
 					{
 						headers: {
 							...(token
