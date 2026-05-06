@@ -64,19 +64,36 @@ const updatePost = async (req: Request, res: Response) => {
 };
 
 const getAllPosts = async (req: Request, res: Response) => {
-	try {
-		const posts = await Post.find();
+    try {
+        const posts = await Post.aggregate([
+            {
+                $lookup: {
+                    from: 'comments', // Comment collection ka naam (database mein lowercase plural hota hai)
+                    localField: '_id',
+                    foreignField: 'postId',
+                    as: 'comments'
+                }
+            },
+            {
+                $addFields: {
+                    commentCount: { $size: '$comments' }
+                }
+            },
+            {
+                $project: {
+                    comments: 0 // Agar aapko saare comments nahi chahiye, sirf count chahiye
+                }
+            }
+        ]);
 
-		return res.status(200).json({
-			success: true,
-			results: posts.length,
-			data: posts,
-		});
-	} catch (error: any) {
-		return res.status(500).json({
-			message: error.message,
-		});
-	}
+        return res.status(200).json({
+            success: true,
+            results: posts.length,
+            data: posts,
+        });
+    } catch (error: any) {
+        return res.status(500).json({ message: error.message });
+    }
 };
 
 const deletePosts = async (req: Request, res: Response) => {

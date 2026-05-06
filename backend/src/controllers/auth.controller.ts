@@ -31,7 +31,7 @@ const register = async (req: Request, res: Response) => {
 
 		const hashedPassword = await bcrypt.hash(password, 10);
 
-		console.log('type of: ', typeof hashedPassword)
+		console.log('type of: ', typeof hashedPassword);
 
 		const user = await User.create({
 			name,
@@ -85,9 +85,9 @@ const login = async (req: Request, res: Response) => {
 			});
 		}
 
-		if(!user.isVerified){
+		if (!user.isVerified) {
 			return res.status(403).json({ message: 'Verify email first' });
-		};
+		}
 
 		const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
 			expiresIn: process.env.JWT_EXPIRES_IN,
@@ -125,4 +125,18 @@ const emailVerify = async (req: Request, res: Response) => {
 	}
 };
 
-module.exports = { register, emailVerify, login };
+const getAllUsers = async (req: Request, res: Response) => {
+	try {
+		const users = await User.find().select('-isVerified');
+
+		res.status(201).json({
+			success: true,
+			results: users.length,
+			data: users,
+		});
+	} catch (error: any) {
+		return res.status(500).json({ message: error.message });
+	}
+};
+
+module.exports = { register, emailVerify, login, getAllUsers };

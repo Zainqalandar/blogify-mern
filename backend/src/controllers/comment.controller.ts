@@ -28,6 +28,7 @@ const createComment = async (req: AuthRequest, res: Response) => {
 
 const deleteComment = async (req: Request, res: Response) => {
 	try {
+		console.log('Delete api')
 		const { id } = req.params;
 		const comment = await Comment.findByIdAndDelete(id);
 
@@ -57,6 +58,7 @@ const getCommentsByPostId = async (req: Request, res: Response) => {
 
 		return res.status(200).json({
 			success: true,
+			results: comments.length,
 			data: comments,
 		});
 	} catch (error: any) {

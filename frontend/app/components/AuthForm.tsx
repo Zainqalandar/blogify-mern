@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useData } from "../context/data-provider";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
 
@@ -10,6 +11,7 @@ type AuthFormProps = {
 };
 
 export default function AuthForm({ mode }: AuthFormProps) {
+  const { handleChangeUser, hanleChangeToken } = useData();
   const router = useRouter();
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState<string | null>(null);
@@ -53,6 +55,8 @@ export default function AuthForm({ mode }: AuthFormProps) {
           window.localStorage.setItem("blogify-token", data.token);
           window.localStorage.setItem("blogify-user", JSON.stringify(data.user));
           document.cookie = `blogify-token=${data.token}; path=/; max-age=86400; sameSite=strict`;
+          hanleChangeToken(data.token);
+          handleChangeUser(data.user);
         }
 
         router.push("/dashboard");
@@ -61,8 +65,8 @@ export default function AuthForm({ mode }: AuthFormProps) {
 
       setSuccess("Registration successful. Please check your email and verify your account.");
       setForm({ name: "", email: "", password: "" });
-    } catch (error: any) {
-      setError(error.message || "Unable to submit form.");
+    } catch (error: Error | unknown) {
+      setError((error as Error).message || "Unable to submit form.");
     } finally {
       setLoading(false);
     }

@@ -1,37 +1,41 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Navbar from "./components/Navbar";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
+import Navbar from './components/Navbar';
+import DataProvider from './context/data-provider';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+	variable: '--font-geist-sans',
+	subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+	variable: '--font-geist-mono',
+	subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "Blogify — MERN Blog Platform",
-  description: "Frontend for Blogify with authentication pages and a modern UI.",
+	title: 'Blogify — MERN Blog Platform',
+	description:
+		'Frontend for Blogify with authentication pages and a modern UI.',
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white">
-        <Navbar />
-        {children}
-      </body>
-    </html>
-  );
+	return (
+		<html
+			lang="en"
+			className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+		>
+			<body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white">
+				<DataProvider>
+					<Navbar />
+					{children}
+				</DataProvider>
+			</body>
+		</html>
+	);
 }

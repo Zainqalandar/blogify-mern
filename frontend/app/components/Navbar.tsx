@@ -3,25 +3,19 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useData } from "../context/data-provider";
 
 export default function Navbar() {
+  const { user, handleChangeUser } = useData();
   const pathname = usePathname();
   const router = useRouter();
-  const [userName, setUserName] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedUser = window.localStorage.getItem("blogify-user");
-      setUserName(storedUser ? JSON.parse(storedUser).name : null);
-    }
-  }, []);
 
   const handleLogout = () => {
     if (typeof window !== "undefined") {
       window.localStorage.removeItem("blogify-token");
       window.localStorage.removeItem("blogify-user");
-       // remove cookies token also
       document.cookie = "blogify-token=; path=/; max-age=0; sameSite=strict";
+      handleChangeUser(null);
       router.push("/login");
     }
   };
@@ -40,7 +34,7 @@ export default function Navbar() {
           <Link href="/blogs" className={pathname.startsWith("/blogs") ? "text-slate-900 dark:text-white" : "hover:text-slate-900 dark:hover:text-white"}>
             Blogs
           </Link>
-          {userName ? (
+          {user?.name ? (
             <>
               <Link href="/dashboard" className={pathname === "/dashboard" ? "text-slate-900 dark:text-white" : "hover:text-slate-900 dark:hover:text-white"}>
                 Dashboard

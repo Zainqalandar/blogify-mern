@@ -21,6 +21,7 @@ export default function VerifyPage() {
 
   useEffect(() => {
     if (!token) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setVerifyState({
         status: "error",
         message: "Verification token is missing.",

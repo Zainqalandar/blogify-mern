@@ -2,21 +2,16 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useData } from "../context/data-provider";
 
 export default function DashboardPage() {
-  const [name, setName] = useState<string | null>(null);
+  const { user } = useData();
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedUser = window.localStorage.getItem("blogify-user");
-      setName(storedUser ? JSON.parse(storedUser).name : null);
-    }
-  }, []);
 
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-10 dark:bg-slate-950">
       <div className="mx-auto max-w-5xl rounded-3xl border border-slate-200 bg-white/90 p-10 shadow-xl shadow-slate-200/50 dark:border-slate-800 dark:bg-slate-950/95 dark:shadow-none">
-        <h1 className="text-4xl font-semibold text-slate-950 dark:text-white">Welcome back{ name ? `, ${name}` : "" }!</h1>
+        <h1 className="text-4xl font-semibold text-slate-950 dark:text-white">Welcome back{ user?.name ? `, ${user.name}` : "" }!</h1>
         <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
           This dashboard is ready to connect with your backend APIs. From here you can add post management, see your saved drafts, and build the next Blogify features.
         </p>
